@@ -1,39 +1,64 @@
-
 import React from 'react'
-import { Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Heading, Image, Stack, Text } from "@chakra-ui/react";
+import {Card, CardBody, HStack, Image, Text, VStack} from "@chakra-ui/react";
+import useGetCityData from "../hooks/useGetCityData";
+import img from '../img/mountain.jpg'
+import {useCityStore} from "../stores";
 
-const CardComponent = (dt) => {
+const CardComponent = () => {
+    const {city_data, city_error, city_loading} = useGetCityData();
+    const city = useCityStore(state => state.city);
+
   return (
-    <Card maxW='sm'>
+    <Card backgroundImage={
+        `url(${img})`
+    } backgroundSize={"cover"}
+          _before={
+              {
+                    content: "''",
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    bottom: 0,
+                    right: 0,
+                    bg: 'rgba(0, 0, 0, 0.3)',
+              }
+          }
+          maxW='sm'>
         <CardBody>
-            <Image
-            src='https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80'
-            alt='Green double couch with wooden legs'
-            borderRadius='lg'
-            />
-            <Stack mt='6' spacing='3'>
-            <Heading size='md'>Living room Sofa</Heading>
-            <Text>
-                This sofa is perfect for modern tropical spaces, baroque inspired
-                spaces, earthy toned spaces and for people who love a chic design with a
-                sprinkle of vintage design.
-            </Text>
-            <Text color='blue.600' fontSize='2xl'>
-                $450
-            </Text>
-            </Stack>
+<VStack>
+    <Text>
+        {
+            new Date(city_data?.daily[0]?.dt * 1000).toLocaleDateString('en-US', { weekday: 'long' })
+        }
+    </Text>
+    <Text>
+        {
+            new Date(city_data?.daily[0]?.dt * 1000).toLocaleDateString('en-US', { day: 'numeric' })
+        }
+    </Text>
+    <Image
+        src={`http://openweathermap.org/img/w/${city_data?.daily[0]?.weather[0].icon}.png`}
+        borderRadius='lg'
+    />
+    <Text>
+        {city}
+    </Text>
+    <Text>
+        {city_data?.daily[0]?.weather[0].description}
+    </Text>
+</VStack>
+    <HStack mt={3}>
+        <Text>
+            Current temp {city_data?.daily[0]?.temp.day} °C
+        </Text>
+        <Text>
+            Feels like {city_data?.daily[0]?.feels_like.day} °C
+        </Text>
+        <Text>
+            Humidity {city_data?.daily[0]?.humidity}%
+        </Text>
+    </HStack>
         </CardBody>
-        <Divider />
-        <CardFooter>
-            <ButtonGroup spacing='2'>
-            <Button variant='solid' colorScheme='blue'>
-                Buy now
-            </Button>
-            <Button variant='ghost' colorScheme='blue'>
-                Add to cart
-            </Button>
-            </ButtonGroup>
-        </CardFooter>
     </Card>
   )
 }
