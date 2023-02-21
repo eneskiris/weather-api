@@ -4,6 +4,7 @@ import { create } from 'zustand'
 import axios from "axios";
 import GetCitiesData from "./components/GetCitiesData";
 import GetCountryData from "./components/GetCountryData";
+import CardComponent from './components/CardComponent';
 export const fetcher = url => axios.get(url).then(res => res.data)
 export const useCityStore = create((set) => ({
     city: '',
