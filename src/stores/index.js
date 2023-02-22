@@ -6,12 +6,14 @@ export const useCitiesStore = create((set) => ({
 }))
 export const useCityStore = create((set) => ({
         city: '',
-        set_city: (city) => set(() => ({city: city})),
+        add_city: (city) => set(() => ({city: city})),
+
     }
 ))
 export const useCountryStore = create((set) => ({
         country: '',
-        set_country: (country) => set({country}),
+        add_country: (country) => set({country}),
+        clear_country: () => set(() => ({country: undefined})),
     }
 ))
 

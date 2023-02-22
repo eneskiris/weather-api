@@ -5,22 +5,32 @@ import {
     DrawerCloseButton,
     DrawerContent, DrawerFooter,
     DrawerHeader,
-    DrawerOverlay, useDisclosure
+    DrawerOverlay, useDisclosure, useToast
 } from "@chakra-ui/react";
 import {useRef} from "react";
 import {AddIcon} from "@chakra-ui/icons";
 import GetCountryData from "./GetCountryData";
 import GetCitiesData from "./GetCitiesData";
-import {useCityStore, useSelectedCitiesStore} from "../stores";
+import {useCityStore, useCountryStore, useSelectedCitiesStore} from "../stores";
+import Layout from "../layout";
 
 export default function AddCityDrawer() {
-    const { isOpen, onOpen, onClose } = useDisclosure()
-    const btnRef = useRef()
-    const add_selected_city = useSelectedCitiesStore(state => state.add_selected_city)
-    const city = useCityStore(state => state.city)
-    function handle_add_city() {
-        add_selected_city(city)
-        onClose()
+    const add_selected_city = useSelectedCitiesStore(state => state.add_selected_city);
+    const clear_country_store = useCountryStore(state => state.clear_country);
+    const city = useCityStore(state => state.city);
+    const toast = useToast();
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const btnRef = useRef();
+   function handle_add_city(){
+        add_selected_city(city);
+       clear_country_store();
+       toast({
+           description: `City ${city} added successfully`,
+           status: 'success',
+           duration: 2000,
+           isClosable: true,
+       })
+       onClose();
     }
     return (
         <>
@@ -48,7 +58,7 @@ export default function AddCityDrawer() {
                         <Button variant='outline' mr={3} onClick={onClose}>
                             Cancel
                         </Button>
-                        <Button onClick={handle_add_city} colorScheme='blue'>Save</Button>
+                        <Button onClick={handle_add_city}  colorScheme='blue'>Save</Button>
                     </DrawerFooter>
                 </DrawerContent>
             </Drawer>

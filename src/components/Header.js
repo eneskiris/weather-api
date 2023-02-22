@@ -1,9 +1,7 @@
 import img from '../img/sunny.jpg'
-import {Box, Button, Stack, Text} from "@chakra-ui/react";
-import {AddIcon} from "@chakra-ui/icons";
-import AddCityDrawer from "./AddCityDrawer";
+import {Box, Stack, Text} from "@chakra-ui/react";
 
-export function Header() {
+export function Header({h1,h2,drawer}:{ h1: string, h2: string, drawer: React.ReactNode }){
     return (
         <Stack
             style={{
@@ -18,11 +16,11 @@ export function Header() {
             gap={3}
         >
             <Box width={"50%"}>
-                <Text color={"white"} as={"b"} fontSize='2xl'>Şehir seçerek hava durumunu öğrenebilirsiniz.</Text>
-                <Text color={"white"} fontSize='xl'>Şehirini seç ve hava durumunu öğren.</Text>
+                <Text color={"white"} as={"b"} fontSize='2xl'>{h1}</Text>
+                <Text color={"white"} fontSize='xl'>{h2}</Text>
             </Box>
             <Box width={"50%"}>
-                <AddCityDrawer/>
+                {drawer}
             </Box>
         </Stack>
     );

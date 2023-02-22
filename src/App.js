@@ -1,15 +1,13 @@
 import "./App.css";
-import GetCitiesData from "./components/GetCitiesData";
-import GetCountryData from "./components/GetCountryData";
-import CardComponent from "./components/CardComponent";
 import { SWRConfig } from "swr";
-import Nav from "./components/Nav";
 import Layout from "./layout";
-import {Header} from "./components/Header";
-import {useCityStore, useSelectedCitiesStore} from "./stores";
+import AddAndListCities from "./components/AddAndListCities";
+import {Outlet} from "react-router-dom";
+
+
 function App() {
-    const selected_cities = useSelectedCitiesStore(state => state.selected_cities)
-  return (
+
+    return (
     <>
       <SWRConfig
         value={{
@@ -26,10 +24,9 @@ function App() {
               .catch((e) => console.log("api error", e)),
         }}
       >
+
         <Layout>
-            <Nav />
-            <Header/>
-             {/*<CardComponent/>*/}
+            <Outlet />
         </Layout>
       </SWRConfig>
     </>

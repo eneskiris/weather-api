@@ -7,7 +7,7 @@ import useGetCountryData from "../hooks/useGetCountryData";
 
 export default function GetCountryData() {
     const country = useCountryStore(state=>state.country);
-    const set_country = useCountryStore(state=>state.set_country);
+    const set_country = useCountryStore(state=>state.add_country);
     const set_cities = useCitiesStore(state=>state.set_cities);
     const {country_data, country_error, country_loading} = useGetCountryData();
 

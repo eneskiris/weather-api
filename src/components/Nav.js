@@ -7,7 +7,7 @@ import {
     DrawerCloseButton,
     DrawerContent, DrawerFooter,
     DrawerHeader,
-    DrawerOverlay, HStack, IconButton, Input, Stack, Text, useDisclosure, VStack
+    DrawerOverlay,  IconButton, Stack, Text, useDisclosure, VStack
 } from "@chakra-ui/react";
 import {HamburgerIcon, MoonIcon, SunIcon} from "@chakra-ui/icons";
 import {useThemeStore} from "../stores";
@@ -17,7 +17,7 @@ const Nav = () => {
   const btnRef = React.useRef();
   const theme_store = useThemeStore();
 
-  function handle_icon_click() {
+  function handle_theme_icon_click() {
       theme_store.set_dark_mode(!theme_store.dark_mode);
   }
 
@@ -43,10 +43,10 @@ const Nav = () => {
                 <Button>
                     Home
                 </Button>
-                <IconButton onClick={handle_icon_click} aria-label='Search database' icon={ theme_store.dark_mode ? <MoonIcon/> : <SunIcon/>  } />
-<Text>
-    {theme_store.dark_mode ? 'Dark Mode' : 'Light Mode'}
-</Text>
+                <IconButton onClick={handle_theme_icon_click} aria-label='Search database' icon={ theme_store.dark_mode ? <MoonIcon/> : <SunIcon/>  } />
+                <Text>
+                    {theme_store.dark_mode ? 'Dark Mode' : 'Light Mode'}
+                </Text>
             </VStack>
           </DrawerBody>
 

@@ -4,7 +4,7 @@ import {useCitiesStore, useCityStore, useCountryStore} from "../stores";
 export default function GetCitiesData () {
     const cities = useCitiesStore(state => state.cities)
     const country = useCountryStore(state => state.country)
-    const set_city = useCityStore(state => state.set_city)
+    const set_city = useCityStore(state => state.add_city)
 
     return(
         <>
