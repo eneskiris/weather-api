@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import {useEffect} from "react";
 import {fetcher} from "../App";
-import {Select} from "@chakra-ui/react";
+import {Select, Text} from "@chakra-ui/react";
 import {useCitiesStore, useCountryStore} from "../stores";
 import useGetCountryData from "../hooks/useGetCountryData";
 
@@ -31,7 +31,8 @@ export default function GetCountryData() {
 
     return (
         <>
-        <Select placeholder={"Select Country"} onChange={(e)=>set_country(e.target.value)}>
+            <Text>Ülke</Text>
+        <Select placeholder={"Ülke Seçin"} onChange={(e)=>set_country(e.target.value)}>
             {country_data?.data?.map((country) => (
                 <option key={country.name}  value={country.name}>{country.name}</option>
             ))}

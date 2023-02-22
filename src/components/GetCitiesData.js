@@ -1,4 +1,4 @@
-import {Select} from "@chakra-ui/react";
+import {Select, Text} from "@chakra-ui/react";
 import {useCitiesStore, useCityStore, useCountryStore} from "../stores";
 
 export default function GetCitiesData () {
@@ -8,7 +8,8 @@ export default function GetCitiesData () {
 
     return(
         <>
-            <Select placeholder={"Select City"} disabled={!country} onChange={(e)=>set_city(e.target.value)}>
+            <Text>Şehir</Text>
+            <Select placeholder={"Şehir Seçin"} disabled={!country} onChange={(e)=>set_city(e.target.value)}>
                 {cities.map((city) => (
                     <option key={city}  value={city}>{city}</option>
                 ))}
