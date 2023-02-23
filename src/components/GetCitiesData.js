@@ -1,24 +1,19 @@
-import {create} from "zustand";
-import {useCountryStore} from "./GetCountryData";
-import {useCityStore} from "../App";
+import {Select, Text} from "@chakra-ui/react";
+import {useCitiesStore, useCityStore, useCountryStore} from "../stores";
 
-export const useCitiesStore = create((set) => ({
-    cities: [],
-    set_cities: (city) => set(() => ({cities: [...city]})),
-}))
 export default function GetCitiesData () {
     const cities = useCitiesStore(state => state.cities)
     const country = useCountryStore(state => state.country)
-    const set_city = useCityStore(state => state.set_city)
+    const set_city = useCityStore(state => state.add_city)
 
     return(
         <>
-            <select disabled={!country} onChange={(e)=>set_city(e.target.value)}>
-                <option value="">Select City</option>
+            <Text>Şehir</Text>
+            <Select placeholder={"Şehir Seçin"} disabled={!country} onChange={(e)=>set_city(e.target.value)}>
                 {cities.map((city) => (
                     <option key={city}  value={city}>{city}</option>
                 ))}
-            </select>
+            </Select>
         </>
     )
 }
