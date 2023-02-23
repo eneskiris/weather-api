@@ -1,6 +1,5 @@
 import React from "react";
 import {
-    Box,
     Button,
     Drawer,
     DrawerBody,
@@ -11,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import {HamburgerIcon, MoonIcon, SunIcon} from "@chakra-ui/icons";
 import {useThemeStore} from "../stores";
+import {Link} from "react-router-dom";
 
 const Nav = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -26,7 +26,7 @@ const Nav = () => {
         <Text as={"b"}>
             Hava Durumu Sorgulama
         </Text>
-      <IconButton size={"sm"}  ref={btnRef} colorScheme={"blue"}  onClick={onOpen} icon={<HamburgerIcon />}/>
+      <IconButton size={"sm"}  ref={btnRef} colorScheme={"blue"}  onClick={onOpen} icon={<HamburgerIcon />} aria-label='Search database'/>
       <Drawer
         isOpen={isOpen}
         placement="right"
@@ -40,8 +40,8 @@ const Nav = () => {
 
           <DrawerBody>
             <VStack alignItems={"start"} >
-                <Button>
-                    Home
+                <Button onClick={onClose}>
+                    <Link to={"/"}>Home</Link>
                 </Button>
                 <IconButton onClick={handle_theme_icon_click} aria-label='Search database' icon={ theme_store.dark_mode ? <MoonIcon/> : <SunIcon/>  } />
                 <Text>

@@ -12,7 +12,6 @@ import {AddIcon} from "@chakra-ui/icons";
 import GetCountryData from "./GetCountryData";
 import GetCitiesData from "./GetCitiesData";
 import {useCityStore, useCountryStore, useSelectedCitiesStore} from "../stores";
-import Layout from "../layout";
 
 export default function AddCityDrawer() {
     const add_selected_city = useSelectedCitiesStore(state => state.add_selected_city);

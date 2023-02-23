@@ -1,8 +1,8 @@
 import "./App.css";
 import { SWRConfig } from "swr";
-import Layout from "./layout";
-import AddAndListCities from "./components/AddAndListCities";
-import {Outlet} from "react-router-dom";
+import {RouterProvider} from "react-router-dom";
+import {router} from "./routes";
+import React from "react";
 
 
 function App() {
@@ -24,10 +24,7 @@ function App() {
               .catch((e) => console.log("api error", e)),
         }}
       >
-
-        <Layout>
-            <Outlet />
-        </Layout>
+          <RouterProvider router={router} />
       </SWRConfig>
     </>
   );
