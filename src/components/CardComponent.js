@@ -10,6 +10,7 @@ import {
     MenuItem,
     MenuList, Spinner,
     Text,
+    useToast,
     VStack
 } from "@chakra-ui/react";
 import useGetCityData from "../hooks/useGetCityData";
@@ -21,21 +22,29 @@ import {Link} from "react-router-dom";
 const CardComponent = ({city}) => {
     const remove_selected_city = useSelectedCitiesStore(state => state.remove_selected_city);
     const {city_data} = useGetCityData(city);
+    const toast = useToast();
+
     if (!city_data){
         return <Spinner/>
     }
 
 function handle_remove_city() {
     remove_selected_city(city)
+    toast({
+        description: `City ${city} removed successfully`,
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+    })
+
 }
   return (
-    <Card maxW='sm'
+    <Card maxW='sm' bgImage={`linear-gradient(
+        to left bottom,
+    rgb(0, 0, 0, 0.5),
+    rgb(0, 0, 0, 0.3)
+    ),url(${img})`}
     style={{
-        backgroundImage: `linear-gradient(
-            to left bottom,
-        rgb(0, 0, 0, 0.5),
-        rgb(0, 0, 0, 0.3)
-        ),url(${img})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -44,15 +53,14 @@ function handle_remove_city() {
         height: 300,
         width: 370,
         boxShadow: '0 0 10px 0 rgba(0,0,0,0.5)',
-        _hover: {
-            boxShadow: '0 0 10px 0 rgba(0,0,0,0.5)',
-        },
-        _active: {
-            boxShadow: '0 0 10px 0 rgba(0,0,0,0.5)',
-        },
-        _focus: {
-            boxShadow: '0 0 10px 0 rgba(0,0,0,0.5)',
-        }
+        cursor:"pointer",
+    }}
+    _hover={{
+        backgroundImage: `linear-gradient(
+            to left bottom,
+        rgb(0, 0, 0, 0.6),
+        rgb(0, 0, 0, 0.6)
+        ),url(${img})`,
     }}
     >
         <Menu>
@@ -113,9 +121,10 @@ function handle_remove_city() {
     </Text>
 </VStack>
     <HStack style={{
-        backgroundColor: 'rgba(232, 236, 241,0.5)',
+        backgroundColor: 'rgba(232, 236, 241,0.3)',
         borderRadius: 10,
         padding: 10,
+        textAlign:"center"
     }
     } mt={3}>
         <Text color={"white"}>

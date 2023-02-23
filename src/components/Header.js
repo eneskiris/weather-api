@@ -1,7 +1,7 @@
 import img from '../img/sunny.jpg'
 import {Box, Stack, Text} from "@chakra-ui/react";
 
-export function Header({h1,h2,drawer}:{ h1: string, h2: string, drawer: React.ReactNode }){
+export function Header({h1,h2,drawer}){
     return (
         <Stack
             style={{
@@ -10,6 +10,7 @@ export function Header({h1,h2,drawer}:{ h1: string, h2: string, drawer: React.Re
             backgroundImage:  `url(${img})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
+            marginBottom:"20px"
         }}
             justifyContent={"center"}
             alignItems={"center"}

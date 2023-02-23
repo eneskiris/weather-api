@@ -4,6 +4,9 @@ import {Header} from "./Header";
 import DeleteCityDrawer from "./DeleteCityDrawer";
 import CardComponent from "./CardComponent";
 import img from "../img/mountain.jpg";
+import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
+import { GrNext } from 'react-icons/gr';
 import {
     Card,
     CardBody,
@@ -13,53 +16,64 @@ import {
     VStack
 } from "@chakra-ui/react";
 import React from "react";
+import {useSelectedCitiesStore } from "../stores";
 export default function CityDetails(){
     const { cityName } = useParams();
     const {city_data} = useGetCityData(cityName);
-        return(
+    const cities = useSelectedCitiesStore(state=>state.selected_cities);
+        return(            
             <>
+                {
+                    cities.includes(cityName) &&
+                <>
                 <Header h1={cityName} h2={"Weather for the next 7 days"} drawer={<DeleteCityDrawer cityName={cityName}/>} />
                 <div style={{
                     display:"flex",
+                    width:"1200px"
                 }}>
-                <CardComponent city={cityName}/>
-                <div style={{
-                    display:"flex",
-                    maxWidth:"850px",
-                    marginLeft:"30px",
-                    overflow:"scroll"
-                }}>
+                    <CardComponent city={cityName}/>
+                    <div  style={{
+                        maxWidth:"810px",
+                        marginLeft:"20px"
+                    }}>
+                    <Splide style={{
+                        display:"flex",
+                    }}
+                    hasTrack={ false } aria-label="splide__arrows" className="deneme">
+                    <SplideTrack>
                 {
                     city_data?.daily.map((day, index) => {
-                       return(
-                           <Card maxW='sm'
-                                 style={{
-                                     minWidth:200,
-                                     margin:"0 6px",
-                                     flexShrink:0,
-                                     backgroundImage: `linear-gradient(
+                        return(
+                               <SplideSlide style={{
+                                flexBasis:"180px"
+                               }}>
+                                    <Card maxW='sm' bgImage={`linear-gradient(
             to left bottom,
         rgb(0, 0, 0, 0.5),
         rgb(0, 0, 0, 0.3)
-        ),url(${img})`,
+        ),url(${img})`}
+                                 style={{
+                                     margin:"0 11px",
+                                     maxWidth:"180px",
+                                     flexShrink:0,
                                      backgroundSize: 'cover',
                                      backgroundPosition: 'center',
                                      backgroundRepeat: 'no-repeat',
                                      borderRadius: 10,
                                      position: 'relative',
                                      height: 250,
-                                     width: 200,
+                                     width: 180,
                                      boxShadow: '0 0 10px 0 rgba(0,0,0,0.5)',
-                                     _hover: {
-                                         boxShadow: '0 0 10px 0 rgba(0,0,0,0.5)',
-                                     },
-                                     _active: {
-                                         boxShadow: '0 0 10px 0 rgba(0,0,0,0.5)',
-                                     },
-                                     _focus: {
-                                         boxShadow: '0 0 10px 0 rgba(0,0,0,0.5)',
-                                     }
+                                     cursor:"pointer"
+                                     
                                  }}
+                                 _hover={{
+                                    backgroundImage: `linear-gradient(
+                                        to left bottom,
+                                    rgb(0, 0, 0, 0.6),
+                                    rgb(0, 0, 0, 0.6)
+                                    ),url(${img})`,
+                                }}
                            >
                                <CardBody>
                                    <VStack>
@@ -73,15 +87,18 @@ export default function CityDetails(){
                                                new Date(day.dt * 1000).toLocaleDateString('en-US', { day: 'numeric' })
                                            }
                                        </Text>
-                                       <Image
+                                       <Image style={{marginTop:"20px"}}
                                            src={`http://openweathermap.org/img/w/${day.weather[0].icon}.png`}
                                            borderRadius='lg'
                                        />
                                    </VStack>
                                    <HStack style={{
-                                       backgroundColor: 'rgba(232, 236, 241,0.5)',
+                                       backgroundColor: 'rgba(232, 236, 241,0.3)',
                                        borderRadius: 10,
                                        padding: 10,
+                                       marginTop:30,
+                                       justifyContent:"center"
+                                       
                                    }
                                    }  mt={3}>
                                        <Text color={"white"}>
@@ -93,11 +110,26 @@ export default function CityDetails(){
                                    </HStack>
                                </CardBody>
                            </Card>
+                        </SplideSlide>
                        )
                     })
-                }
+                    }
+                    </SplideTrack>
+                    <div className="splide__arrows">
+                        <button className="splide__arrow splide__arrow--prev"><GrNext/></button>
+                        <button className="splide__arrow splide__arrow--next"><GrNext /></button>
+                    </div>
+                  </Splide>
+                  </div>
                 </div>
-            </div>
-            </>
+                </>
+            }
+                <Text style={{
+                    fontSize:"50px",
+                    margin:"400px "
+                }}>
+                    ARADIĞINIZ ŞEHİRE ŞUANDA ULAŞILAMAMAKTA
+                </Text>
+        </>
         )
 }

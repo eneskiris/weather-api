@@ -5,17 +5,26 @@ import {
     DrawerCloseButton,
     DrawerContent, DrawerFooter,
     DrawerHeader, DrawerOverlay, Text,
-    useDisclosure
+    useDisclosure,
+    useToast
 } from "@chakra-ui/react";
 import {useRef} from "react";
+import { Link } from "react-router-dom";
 import {useSelectedCitiesStore} from "../stores";
 
 export default function DeleteCityDrawer({cityName}) {
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const btnRef = useRef()
+    const btnRef = useRef();
+    const toast = useToast();
     const remove_selected_city = useSelectedCitiesStore(state => state.remove_selected_city);
     function handle_remove_city() {
         remove_selected_city(cityName)
+        toast({
+            description: `City ${cityName} removed successfully`,
+            status: 'success',
+            duration: 2000,
+            isClosable: true,
+        })
         onClose()
     }
 
@@ -44,7 +53,9 @@ export default function DeleteCityDrawer({cityName}) {
                         <Button variant='outline' mr={3} onClick={onClose}>
                             Cancel
                         </Button>
-                        <Button onClick={handle_remove_city} colorScheme='blue'>Remove</Button>
+                        <Button onClick={handle_remove_city} colorScheme='blue'>
+                            <Link to={"/"}>Remove</Link>
+                        </Button>
                     </DrawerFooter>
                 </DrawerContent>
             </Drawer>
