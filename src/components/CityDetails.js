@@ -19,12 +19,24 @@ export default function CityDetails(){
         return(
             <>
                 <Header h1={cityName} h2={"Weather for the next 7 days"} drawer={<DeleteCityDrawer cityName={cityName}/>} />
+                <div style={{
+                    display:"flex",
+                }}>
                 <CardComponent city={cityName}/>
+                <div style={{
+                    display:"flex",
+                    maxWidth:"850px",
+                    marginLeft:"30px",
+                    overflow:"scroll"
+                }}>
                 {
                     city_data?.daily.map((day, index) => {
                        return(
                            <Card maxW='sm'
                                  style={{
+                                     minWidth:200,
+                                     margin:"0 6px",
+                                     flexShrink:0,
                                      backgroundImage: `linear-gradient(
             to left bottom,
         rgb(0, 0, 0, 0.5),
@@ -36,7 +48,7 @@ export default function CityDetails(){
                                      borderRadius: 10,
                                      position: 'relative',
                                      height: 250,
-                                     width: 190,
+                                     width: 200,
                                      boxShadow: '0 0 10px 0 rgba(0,0,0,0.5)',
                                      _hover: {
                                          boxShadow: '0 0 10px 0 rgba(0,0,0,0.5)',
@@ -84,7 +96,8 @@ export default function CityDetails(){
                        )
                     })
                 }
-
+                </div>
+            </div>
             </>
         )
 }
