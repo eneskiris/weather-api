@@ -1,7 +1,7 @@
 import AddAndListCities from "../components/AddAndListCities";
 
 const HomeScreen = () => {
-    return <AddAndListCities />;
+  return <AddAndListCities />;
 };
 
 export default HomeScreen;

@@ -1,7 +1,7 @@
 import CityDetails from "../components/CityDetails";
 
 const CityDetailsScreen = () => {
-    return <CityDetails />;
+  return <CityDetails />;
 };
 
 export default CityDetailsScreen;

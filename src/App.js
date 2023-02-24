@@ -1,13 +1,11 @@
 import "./App.css";
 import { SWRConfig } from "swr";
-import {RouterProvider} from "react-router-dom";
-import {router} from "./routes";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes";
 import React from "react";
 
-
 function App() {
-
-    return (
+  return (
     <>
       <SWRConfig
         value={{
@@ -24,7 +22,7 @@ function App() {
               .catch((e) => console.log("api error", e)),
         }}
       >
-          <RouterProvider router={router} />
+        <RouterProvider router={router} />
       </SWRConfig>
     </>
   );
