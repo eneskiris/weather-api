@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { Select, Text } from "@chakra-ui/react";
-import { useCitiesStore, useCountryStore } from "../stores";
-import useGetCountryData from "../hooks/useGetCountryData";
+import { useCitiesStore, useCountryStore } from "../../stores";
+import useGetCountryData from "../../hooks/useGetCountryData";
+import React from "react";
 
 export default function GetCountryData() {
   const country = useCountryStore((state) => state.country);

@@ -1,5 +1,6 @@
 import { Select, Text } from "@chakra-ui/react";
-import { useCitiesStore, useCityStore, useCountryStore } from "../stores";
+import React from "react";
+import { useCitiesStore, useCityStore, useCountryStore } from "../../stores";
 
 export default function GetCitiesData() {
   const cities = useCitiesStore((state) => state.cities);

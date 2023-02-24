@@ -1,8 +1,8 @@
-import { Header } from "./Header";
-import AddCityDrawer from "./AddCityDrawer";
+import { Header } from "../Header/Header";
+import AddCityDrawer from "../AddCityDrawer/AddCityDrawer";
 import { Box, HStack } from "@chakra-ui/react";
-import CardComponent from "./CardComponent";
-import { useSelectedCitiesStore } from "../stores";
+import CardComponent from "../CardComponent/CardComponent";
+import { useSelectedCitiesStore } from "../../stores";
 import React from "react";
 
 export default function AddAndListCities() {

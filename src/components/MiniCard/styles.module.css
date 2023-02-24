@@ -1,0 +1,46 @@
+.card {
+  background-image: linear-gradient(
+      to left bottom,
+      rgb(0, 0, 0, 0.5),
+      rgb(0, 0, 0, 0.3)
+    ),
+    url(/public/assets/mountain.jpg) !important;
+  margin: 0 11px !important;
+  height: 250px !important;
+  width: 180px !important;
+  flex-shrink: 0 !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  border-radius: 10px !important;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5) !important;
+  cursor: pointer !important;
+}
+.card:hover {
+  background-image: linear-gradient(
+      to left bottom,
+      rgb(0, 0, 0, 0.6),
+      rgb(0, 0, 0, 0.6)
+    ),
+    url(/public/assets/mountain.jpg);
+}
+
+.text {
+  color: white;
+}
+
+.tooltip {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.image {
+  margin-top: 20px !important;
+}
+
+.hstack {
+  background-color: rgba(232, 236, 241, 0.3);
+  border-radius: 10px !important;
+  padding: 10px;
+  margin-top: 30px !important;
+  justify-content: center;
+}

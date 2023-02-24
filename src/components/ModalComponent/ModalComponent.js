@@ -15,7 +15,8 @@ import {
 import React from "react";
 import { BsClouds } from "react-icons/bs";
 import { WiRain, WiStrongWind } from "react-icons/wi";
-import CardComponent from "./CardComponent";
+import CardComponent from "../CardComponent/CardComponent";
+import styles from "./styles.module.css";
 
 const ModalComponent = ({ children, day, city_name, index }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -31,14 +32,7 @@ const ModalComponent = ({ children, day, city_name, index }) => {
   }
   return (
     <>
-      <Button
-        bgColor={"transparent"}
-        _hover={{
-          bgColor: "transparent",
-        }}
-        height={"100%"}
-        onClick={onOpen}
-      >
+      <Button className={styles.button} onClick={onOpen}>
         {children}
       </Button>
       <Modal

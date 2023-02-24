@@ -1,15 +1,16 @@
-import useGetCityData from "../hooks/useGetCityData";
+import useGetCityData from "../../hooks/useGetCityData";
 import { useParams } from "react-router-dom";
-import { Header } from "./Header";
-import DeleteCityDrawer from "./DeleteCityDrawer";
-import CardComponent from "./CardComponent";
+import { Header } from "../Header/Header";
+import DeleteCityDrawer from "../DeleteCityDrawer/DeleteCityDrawer";
+import CardComponent from "../CardComponent/CardComponent";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import { GrNext } from "react-icons/gr";
-import { Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import React from "react";
-import { useSelectedCitiesStore } from "../stores";
-import MiniCard from "./MiniCard";
+import { useSelectedCitiesStore } from "../../stores";
+import MiniCard from "../MiniCard/MiniCard";
+import styles from "./styles.module.css";
 
 export default function CityDetails() {
   const { cityName } = useParams();
@@ -25,36 +26,18 @@ export default function CityDetails() {
             h2={"Weather for the next 7 days"}
             drawer={<DeleteCityDrawer cityName={cityName} />}
           />
-          <div
-            style={{
-              display: "flex",
-              width: "1200px",
-            }}
-          >
+          <Flex className={styles.flex}>
             <CardComponent render_at_home={false} city={cityName} index={0} />
-            <div
-              style={{
-                maxWidth: "810px",
-                marginLeft: "20px",
-              }}
-            >
+            <Box className={styles.box}>
               <Splide
-                style={{
-                  display: "flex",
-                }}
+                className={styles.splide}
                 hasTrack={false}
                 aria-label="splide__arrows"
-                className="deneme"
               >
                 <SplideTrack>
                   {city_data?.daily.map((day, index) => {
                     return (
-                      <SplideSlide
-                        key={index}
-                        style={{
-                          flexBasis: "180px",
-                        }}
-                      >
+                      <SplideSlide className={styles.splide_slide} key={index}>
                         <MiniCard
                           city_name={cityName}
                           day={day}
@@ -64,25 +47,20 @@ export default function CityDetails() {
                     );
                   })}
                 </SplideTrack>
-                <div className="splide__arrows">
+                <Box className="splide__arrows">
                   <button className="splide__arrow splide__arrow--prev">
                     <GrNext />
                   </button>
                   <button className="splide__arrow splide__arrow--next">
                     <GrNext />
                   </button>
-                </div>
+                </Box>
               </Splide>
-            </div>
-          </div>
+            </Box>
+          </Flex>
         </>
       ) : (
-        <Text
-          style={{
-            fontSize: "50px",
-            margin: "400px ",
-          }}
-        >
+        <Text className={styles.text}>
           ARADIĞINIZ ŞEHİRE ŞUANDA ULAŞILAMAMAKTA
         </Text>
       )}

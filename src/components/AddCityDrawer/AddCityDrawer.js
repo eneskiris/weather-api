@@ -12,13 +12,13 @@ import {
 } from "@chakra-ui/react";
 import { useRef } from "react";
 import { AddIcon } from "@chakra-ui/icons";
-import GetCountryData from "./GetCountryData";
-import GetCitiesData from "./GetCitiesData";
+import GetCountryData from "../GetCountryData/GetCountryData";
+import GetCitiesData from "../GetCitiesData/GetCitiesData";
 import {
   useCityStore,
   useCountryStore,
   useSelectedCitiesStore,
-} from "../stores";
+} from "../../stores";
 import React from "react";
 
 export default function AddCityDrawer() {

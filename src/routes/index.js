@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import React from "react";
-import CityDetails from "../components/CityDetails";
+import CityDetails from "../components/CityDetails/CityDetails";
 import Root from "../screens/Root";
 import HomeScreen from "../screens/HomeScreen";
 

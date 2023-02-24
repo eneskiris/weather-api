@@ -36,7 +36,6 @@
     transform: rotate(360deg);
   }
 }
-
-.deneme .splide__pagination {
+.splide .splide__pagination {
   display: none;
 }

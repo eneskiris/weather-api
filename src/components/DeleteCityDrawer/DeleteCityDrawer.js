@@ -14,7 +14,7 @@ import {
 import React from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelectedCitiesStore } from "../stores";
+import { useSelectedCitiesStore } from "../../stores";
 
 export default function DeleteCityDrawer({ cityName }) {
   const { isOpen, onOpen, onClose } = useDisclosure();

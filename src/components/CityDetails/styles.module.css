@@ -1,0 +1,21 @@
+.flex {
+  width: 1200px !important;
+}
+
+.box {
+  width: 810px;
+  margin-left: 20px !important;
+}
+
+.splide {
+  height: 100%;
+}
+
+.splide_slide {
+  flex-basis: 180px;
+  height: 100%;
+}
+
+.text {
+  font-size: 50px;
+}
