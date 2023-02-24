@@ -14,8 +14,9 @@ export default function GetCountryData() {
       if (ulke.name === country) {
         set_cities(ulke.cities);
       }
+      return undefined;
     });
-  }, [country]);
+  }, [country, country_data?.data, set_cities]);
 
   if (country_loading) {
     return <div>Loading...</div>;

@@ -8,10 +8,7 @@ import {
   ModalOverlay,
   useDisclosure,
   Text,
-  HStack,
   Box,
-  VStack,
-  Icon,
   Flex,
   useColorMode,
 } from "@chakra-ui/react";
