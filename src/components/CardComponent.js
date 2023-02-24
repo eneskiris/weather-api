@@ -11,6 +11,7 @@ import {
   MenuList,
   Spinner,
   Text,
+  Tooltip,
   useToast,
   VStack,
 } from "@chakra-ui/react";
@@ -18,17 +19,23 @@ import useGetCityData from "../hooks/useGetCityData";
 import img from "../img/mountain.jpg";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { useSelectedCitiesStore } from "../stores";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const CardComponent = ({ city }) => {
+const CardComponent = ({ city, render_at_home, index }) => {
+  console.log(index);
   const remove_selected_city = useSelectedCitiesStore(
     (state) => state.remove_selected_city
   );
   const { city_data } = useGetCityData(city);
   const toast = useToast();
+  const navigate = useNavigate();
 
   if (!city_data) {
     return <Spinner />;
+  }
+
+  function handleViewWeather() {
+    navigate(`/weather/${city}`);
   }
 
   function handle_remove_city() {
@@ -42,7 +49,7 @@ const CardComponent = ({ city }) => {
   }
   return (
     <Card
-      maxW="sm"
+      maxW={"22rem"}
       bgImage={`linear-gradient(
         to left bottom,
     rgb(0, 0, 0, 0.5),
@@ -68,58 +75,64 @@ const CardComponent = ({ city }) => {
       }}
     >
       <Menu>
-        <IconButton
-          style={{
-            backgroundColor: "transparent",
-            border: "none",
-            outline: "none",
-            position: "absolute",
-            top: 17,
-            right: 5,
-            color: "white",
-            _hover: {
+        {render_at_home && (
+          <IconButton
+            style={{
               backgroundColor: "transparent",
-            },
-            _active: {
-              backgroundColor: "transparent",
-            },
-            _focus: {
-              backgroundColor: "transparent",
-            },
-            fontSize: "1.3rem",
-          }}
-          as={MenuButton}
-          aria-label="Call Sage"
-          icon={<BsThreeDotsVertical />}
-        />
+              border: "none",
+              outline: "none",
+              position: "absolute",
+              top: 17,
+              right: 5,
+              color: "white",
+              _hover: {
+                backgroundColor: "transparent",
+              },
+              _active: {
+                backgroundColor: "transparent",
+              },
+              _focus: {
+                backgroundColor: "transparent",
+              },
+              fontSize: "1.3rem",
+            }}
+            as={MenuButton}
+            aria-label="Call Sage"
+            icon={<BsThreeDotsVertical />}
+          />
+        )}
         <MenuList>
-          <MenuItem>
-            <Link to={`/weather/${city}`}>View Weather</Link>
-          </MenuItem>
+          <MenuItem onClick={handleViewWeather}>View Weather</MenuItem>
           <MenuItem onClick={handle_remove_city}>Remove City</MenuItem>
         </MenuList>
       </Menu>
       <CardBody>
         <VStack>
           <Text color={"white"}>
-            {new Date(city_data?.daily[0]?.dt * 1000).toLocaleDateString(
+            {new Date(city_data?.daily[index]?.dt * 1000).toLocaleDateString(
               "en-US",
               { weekday: "long" }
             )}
           </Text>
           <Text color={"white"}>
-            {new Date(city_data?.daily[0]?.dt * 1000).toLocaleDateString(
+            {new Date(city_data?.daily[index]?.dt * 1000).toLocaleDateString(
               "en-US",
               { day: "numeric" }
             )}
           </Text>
-          <Image
-            src={`http://openweathermap.org/img/w/${city_data?.daily[0]?.weather[0].icon}.png`}
-            borderRadius="lg"
-          />
+          <Tooltip
+            placement="top"
+            bgColor={"rgba(0, 0, 0,0.7)"}
+            label={`${city_data?.daily[index]?.weather[0].main}`}
+          >
+            <Image
+              src={`http://openweathermap.org/img/w/${city_data?.daily[index]?.weather[0].icon}.png`}
+              borderRadius="lg"
+            />
+          </Tooltip>
           <Text color={"white"}>{city}</Text>
           <Text color={"white"}>
-            {city_data?.daily[0]?.weather[0].description}
+            {city_data?.daily[index]?.weather[0].description}
           </Text>
         </VStack>
         <HStack
@@ -133,17 +146,21 @@ const CardComponent = ({ city }) => {
         >
           <Text color={"white"}>
             Current temp{" "}
-            <Text as={"b"}>{city_data?.daily[0]?.temp.day.toFixed(0)} °C</Text>
+            <Text as={"b"}>
+              {city_data?.daily[index]?.temp.day.toFixed(0)} °C
+            </Text>
           </Text>
           <Text color={"white"}>
             Feels like{" "}
             <Text as={"b"}>
-              {city_data?.daily[0]?.feels_like.day.toFixed(0)} °C
+              {city_data?.daily[index]?.feels_like.day.toFixed(0)} °C
             </Text>
           </Text>
           <Text color={"white"}>
             Humidity{" "}
-            <Text as={"b"}>{city_data?.daily[0]?.humidity.toFixed(0)}%</Text>
+            <Text as={"b"}>
+              {city_data?.daily[index]?.humidity.toFixed(0)}%
+            </Text>
           </Text>
         </HStack>
       </CardBody>

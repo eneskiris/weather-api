@@ -16,12 +16,18 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { useThemeStore } from "../stores";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Nav = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const theme_store = useThemeStore();
+  const navigate = useNavigate();
+
+  function handle_home_button_click() {
+    navigate("/");
+    onClose();
+  }
 
   function handle_theme_icon_click() {
     theme_store.set_dark_mode(!theme_store.dark_mode);
@@ -56,7 +62,7 @@ const Nav = () => {
 
           <DrawerBody>
             <VStack alignItems={"start"}>
-              <Button onClick={onClose}>
+              <Button onClick={handle_home_button_click}>
                 <Link to={"/"}>Home</Link>
               </Button>
               <IconButton

@@ -19,7 +19,7 @@ export default function AddAndListCities() {
       <HStack>
         {selected_cities.map((city, number) => (
           <Box key={number} className="col-md-4">
-            <CardComponent city={city} />
+            <CardComponent render_at_home={true} city={city} index={0} />
           </Box>
         ))}
       </HStack>

@@ -11,8 +11,9 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
+import React from "react";
 import { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelectedCitiesStore } from "../stores";
 
 export default function DeleteCityDrawer({ cityName }) {
@@ -22,15 +23,17 @@ export default function DeleteCityDrawer({ cityName }) {
   const remove_selected_city = useSelectedCitiesStore(
     (state) => state.remove_selected_city
   );
-  function handle_remove_city() {
-    remove_selected_city(cityName);
+  const navigate = useNavigate();
+
+  async function handle_remove_city() {
+    await remove_selected_city(cityName);
     toast({
       description: `City ${cityName} removed successfully`,
       status: "success",
       duration: 2000,
       isClosable: true,
     });
-    onClose();
+    navigate("/");
   }
 
   return (
@@ -71,7 +74,7 @@ export default function DeleteCityDrawer({ cityName }) {
               Cancel
             </Button>
             <Button onClick={handle_remove_city} colorScheme="blue">
-              <Link to={"/"}>Remove</Link>
+              Remove
             </Button>
           </DrawerFooter>
         </DrawerContent>
