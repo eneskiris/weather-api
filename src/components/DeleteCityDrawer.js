@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelectedCitiesStore } from "../stores";
 
 export default function DeleteCityDrawer({ cityName }) {
@@ -38,13 +38,7 @@ export default function DeleteCityDrawer({ cityName }) {
 
   return (
     <>
-      <Button
-        color={"gray.600"}
-        ref={btnRef}
-        onClick={onOpen}
-        size={"sm"}
-        variant="solid"
-      >
+      <Button ref={btnRef} onClick={onOpen} size={"sm"} variant="solid">
         Remove City
       </Button>
       <Drawer

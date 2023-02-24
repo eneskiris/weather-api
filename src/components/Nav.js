@@ -8,20 +8,20 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
+  Icon,
   IconButton,
   Stack,
   Text,
+  useColorMode,
   useDisclosure,
   VStack,
 } from "@chakra-ui/react";
 import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { useThemeStore } from "../stores";
 import { Link, useNavigate } from "react-router-dom";
 
 const Nav = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
-  const theme_store = useThemeStore();
   const navigate = useNavigate();
 
   function handle_home_button_click() {
@@ -29,10 +29,17 @@ const Nav = () => {
     onClose();
   }
 
-  function handle_theme_icon_click() {
-    theme_store.set_dark_mode(!theme_store.dark_mode);
+  const { colorMode, toggleColorMode } = useColorMode();
+  function handle_icon_bg_color(color_type) {
+    switch (color_type) {
+      case "bg":
+        return colorMode === "dark" ? "#F5DCBA" : "#344265";
+      case "color":
+        return colorMode === "dark" ? "#69552D" : "#fff";
+      default:
+        break;
+    }
   }
-
   return (
     <Stack
       direction={"row"}
@@ -44,7 +51,8 @@ const Nav = () => {
       <IconButton
         size={"sm"}
         ref={btnRef}
-        colorScheme={"blue"}
+        color={handle_icon_bg_color("color")}
+        bgColor={handle_icon_bg_color("bg")}
         onClick={onOpen}
         icon={<HamburgerIcon />}
         aria-label="Search database"
@@ -66,11 +74,12 @@ const Nav = () => {
                 <Link to={"/"}>Home</Link>
               </Button>
               <IconButton
-                onClick={handle_theme_icon_click}
+                color={handle_icon_bg_color("color")}
+                bgColor={handle_icon_bg_color("bg")}
+                onClick={toggleColorMode}
                 aria-label="Search database"
-                icon={theme_store.dark_mode ? <MoonIcon /> : <SunIcon />}
+                icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               />
-              <Text>{theme_store.dark_mode ? "Dark Mode" : "Light Mode"}</Text>
             </VStack>
           </DrawerBody>
 

@@ -13,6 +13,7 @@ import {
   VStack,
   Icon,
   Flex,
+  useColorMode,
 } from "@chakra-ui/react";
 import React from "react";
 import { BsClouds } from "react-icons/bs";
@@ -27,6 +28,10 @@ const ModalComponent = ({ children, day, city_name, index }) => {
   const card_day = new Date(day.dt * 1000).toLocaleDateString("en-US", {
     day: "numeric",
   });
+  const { colorMode } = useColorMode();
+  function handle_icon_color() {
+    return colorMode === "dark" ? "#fff" : "#344265";
+  }
   return (
     <>
       <Button
@@ -68,7 +73,7 @@ const ModalComponent = ({ children, day, city_name, index }) => {
                   alignItems={"center"}
                 >
                   <Flex alignItems={"center"}>
-                    <WiStrongWind color="#344265" size={"3.9rem"} />
+                    <WiStrongWind color={handle_icon_color()} size={"3.9rem"} />
                     <Box display={"flex"} flexDirection={"column"}>
                       <Text fontSize="xl">Wind</Text>
                       <Text as="b">
@@ -81,7 +86,7 @@ const ModalComponent = ({ children, day, city_name, index }) => {
                   </Flex>
 
                   <Flex gap={2} alignItems={"center"}>
-                    <WiRain color="#344265" size={"4rem"} />
+                    <WiRain color={handle_icon_color()} size={"4rem"} />
                     <Box>
                       <Text fontSize="xl">Rain</Text>
                       <Text as="b">
@@ -91,7 +96,7 @@ const ModalComponent = ({ children, day, city_name, index }) => {
                   </Flex>
 
                   <Flex gap={3} alignItems={"center"}>
-                    <BsClouds color="#344265" size={"3rem"} />
+                    <BsClouds color={handle_icon_color()} size={"3rem"} />
                     <Box>
                       <Text fontSize="xl">Clouds</Text>
                       <Text as="b">

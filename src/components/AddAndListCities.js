@@ -3,6 +3,7 @@ import AddCityDrawer from "./AddCityDrawer";
 import { Box, HStack } from "@chakra-ui/react";
 import CardComponent from "./CardComponent";
 import { useSelectedCitiesStore } from "../stores";
+import React from "react";
 
 export default function AddAndListCities() {
   const selected_cities = useSelectedCitiesStore(
